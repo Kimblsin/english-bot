@@ -501,7 +501,7 @@ def main():
   application.add_handler(CommandHandler("delword", admin_del_word))
   application.add_handler(CommandHandler("listwords", admin_list_words))
   application.add_handler(CommandHandler("addtask", admin_add_task))
-  application.add_handler(CommandHandler("deltask", admin_deltask))
+  application.add_handler(CommandHandler("deltask", admin_del_task))
   application.add_handler(CommandHandler("addmeme", admin_add_meme))
   application.add_handler(CommandHandler("delmeme", admin_del_meme))
 
