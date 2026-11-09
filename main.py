@@ -483,43 +483,39 @@ async def admin_del_meme(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 def main():
-    application = ApplicationBuilder().token(TOKEN).build()
+  application = ApplicationBuilder().token(TOKEN).build()
 
-    # User buyruqlari
-    application.add_handler(CommandHandler("start", start))
-    application.add_handler(CommandHandler("words", cmd_word))
-    application.add_handler(CommandHandler("sozlar", cmd_word))
-    application.add_handler(CommandHandler("soz", cmd_word))
-    application.add_handler(CommandHandler("oyin", start_game))
-    application.add_handler(CommandHandler("game", start_game))
-    application.add_handler(CommandHandler("tasks", show_tasks))
-    application.add_handler(CommandHandler("memes", show_memes))
+  # User buyruqlari
+  application.add_handler(CommandHandler("start", start))
+  application.add_handler(CommandHandler("words", cmd_word))
+  application.add_handler(CommandHandler("sozlar", cmd_word))
+  application.add_handler(CommandHandler("soz", cmd_word))
+  application.add_handler(CommandHandler("oyin", start_game))
+  application.add_handler(CommandHandler("game", start_game))
+  application.add_handler(CommandHandler("tasks", show_tasks))
+  application.add_handler(CommandHandler("memes", show_memes))
 
-    # Admin buyruqlari
-    application.add_handler(CommandHandler("admin", admin_panel))
-    application.add_handler(CommandHandler("addword", admin_add_word))
-    application.add_handler(CommandHandler("delword", admin_del_word))
-    application.add_handler(CommandHandler("listwords", admin_list_words))
-    application.add_handler(CommandHandler("addtask", admin_add_task))
-    application.add_handler(CommandHandler("deltask", admin_del_task))
-    application.add_handler(CommandHandler("addmeme", admin_add_meme))
-    application.add_handler(CommandHandler("delmeme", admin_del_meme))
+  # Admin buyruqlari
+  application.add_handler(CommandHandler("admin", admin_panel))
+  application.add_handler(CommandHandler("addword", admin_add_word))
+  application.add_handler(CommandHandler("delword", admin_del_word))
+  application.add_handler(CommandHandler("listwords", admin_list_words))
+  application.add_handler(CommandHandler("addtask", admin_add_task))
+  application.add_handler(CommandHandler("deltask", admin_deltask))
+  application.add_handler(CommandHandler("addmeme", admin_add_meme))
+  application.add_handler(CommandHandler("delmeme", admin_del_meme))
 
-    # Xabar va tugmalar
-    application.add_handler(
-        MessageHandler(filters.TEXT & ~filters.COMMAND, check_game_answer)
-    )
-    application.add_handler(CallbackQueryHandler(button_handler))
+  # Xabar va tugmalar
+  application.add_handler(
+      MessageHandler(filters.TEXT & ~filters.COMMAND, check_game_answer)
+  )
+  application.add_handler(CallbackQueryHandler(button_handler))
 
-    print("Admin panel va yangi bo'limlar bilan bot ishga tushdi...")
-
-    while True:
-        try:
-            application.run_polling(drop_pending_updates=True)
-        except Exception as e:
-            print(f"Internetda uzilish bo'ldi: {e}")
-            time.sleep(5)
+  print("Bot ishga tushmoqda...")
+  # ESKI YAMOQ: application.run_polling(drop_pending_updates=True)
+  # YANGI TO'G'RI QATOR (Shuni yozasiz):
+  application.run_polling(allowed_updates=Update.ALL_TYPES)
 
 
 if __name__ == "__main__":
-    main()
+  main()
